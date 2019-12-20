@@ -13,6 +13,6 @@ var addStrings = function (num1, num2) {
   if (carry) result = carry + result;
   return result;
 };
-
+//sss
 // console.log(addStrings('1', '2'));
 console.log(addStrings("99999", "2"));
