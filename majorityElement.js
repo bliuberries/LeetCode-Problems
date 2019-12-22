@@ -1,3 +1,6 @@
+//Time complexity O(n)
+//Space complexity O(n)
+
 var majorityElement = function (nums) {
   let count = {};
   for (let i of nums) {
