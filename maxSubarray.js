@@ -1,11 +1,11 @@
 var maxSubArray = function (nums) {
   let current = max = nums[0];
   for (let i = 1; i < nums.length; i++) {
-    // current = current + nums[i];
-    // if(nums[i] > current) current = nums[i];
-    current = Math.max(current + nums[i], nums[i]);
-    max = Math.max(max, current)
-    // if (current > max) max = current;    
+    current = current + nums[i];
+    if(nums[i] > current) current = nums[i];
+    // current = Math.max(current + nums[i], nums[i]);
+    // max = Math.max(max, current)
+    if (current > max) max = current;    
   }
   return max
 };
