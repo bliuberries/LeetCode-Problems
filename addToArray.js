@@ -13,7 +13,7 @@ var addToArrayForm = function(A, K) {
     let val2 = A[j--] || 0;
     let sum = +val1 + val2 + carry;
     j + 1 >= 0 ? A[j + 1] = sum % 10 : A.unshift(sum % 10);
-    carry = Math.trunc(sum / 10);
+    carry = ~~sum / 10;
   }
   if(carry) A.unshift(carry);
   return A;

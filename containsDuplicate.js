@@ -1,3 +1,5 @@
+//Time Complexity O(n)
+//Space Complexity O(n)
 /**
  * @param {number[]} nums
  * @return {boolean}
