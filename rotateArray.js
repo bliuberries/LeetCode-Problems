@@ -4,12 +4,7 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var rotate = function(nums, k) {
-  while(k > 0) {
-    let temp = nums.pop();
-    nums.unshift(temp);
-    k--;
-  }
-  return nums;
+  nums.unshift(...nums.splice(-(k % nums.length)));
 };
 
 let testArr1 = [1,2,3,4,5,6,7];
