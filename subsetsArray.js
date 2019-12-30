@@ -3,18 +3,14 @@
  * @return {number[][]}
  */
 var subsets = function (nums) {
-  let arr = [[]];
+  let arr = [];
   let add = (insert, index) => {
-    
     arr.push(insert);
-    for (let k = index + 1; k < nums.length; k++) {
-      // insert.push(nums[k]);
-      add([...insert, nums[k]], k);
+    for (let k = index; k < nums.length; k++) {
+      add([...insert, nums[k]], k + 1);
     }
   }
-  for (let i = 0; i < nums.length; i++) {
-    add([nums[i]], i)
-  }
+  add([], 0)
   return arr;
 };
 
