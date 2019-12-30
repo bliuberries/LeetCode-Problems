@@ -10,7 +10,7 @@ var subsets = function (nums) {
       add([...insert, nums[k]], k + 1);
     }
   }
-  add([], 0)
+  add([], 0);
   return arr;
 };
 
