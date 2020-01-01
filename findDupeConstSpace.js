@@ -6,29 +6,23 @@
 //   }
 // };
 
-var findDuplicate = function(nums) {
-    
-  let slow = nums[0];
-  let fast = nums[0];
-  
-  do {
-      slow = nums[slow];
-      fast = nums[nums[fast]];
-      console.log(slow, fast);
-  } while(slow !== fast)
-          
+var findDuplicate = function (nums) {
+  let slow = nums[nums[0]];
+  let fast = nums[nums[nums[0]]];
+  while (slow !== fast){
+    slow = nums[slow];
+    fast = nums[nums[fast]];
+  } 
   let ptr1 = nums[0];
   let ptr2 = slow;
-  
-  while(ptr1 !== ptr2) {
-      ptr1 = nums[ptr1];
-      ptr2 = nums[ptr2];
+  while (ptr1 !== ptr2) {
+    ptr1 = nums[ptr1];
+    ptr2 = nums[ptr2];
   }
-  
-  return ptr1;        
+  return ptr1;
 };
 
-const test1 = [1,3,4,2,2];
-const test2 = [3,1,3,4,2];
+const test1 = [1, 3, 4, 2, 2];
+const test2 = [3, 1, 3, 4, 2];
 console.log(findDuplicate(test1));
 // console.log(findDuplicate(test2));
