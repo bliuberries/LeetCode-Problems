@@ -47,4 +47,4 @@ var uniquePaths = function (m, n) {
   return dp[m][n];
 };
 
-console.log(uniquePathsDP(4, 3))
+console.log(uniquePathsDP(51, 7))
