@@ -27,7 +27,6 @@ var uniquePathsDP = (m, n) => {
       arr[j] = (arr[j] || 1) + (arr[j - 1] || 1);
     }
   }
-  console.log(arr);
   return arr[n - 1];
 }
 
