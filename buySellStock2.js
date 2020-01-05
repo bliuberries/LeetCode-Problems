@@ -1,11 +1,20 @@
 var maxProfit = function(prices) {
-  let profit = 0;
-  for(let i = 1; i < prices.length; i++) {
-    if (prices[i] > prices[i - 1]) {
-      profit += prices[i] - prices[i - 1];
+  let profit = currProfit = 0;
+  let buy = prices[0];
+  for(let tomorrow = 1; tomorrow < prices.length; tomorrow++) {
+    if(prices[tomorrow] < buy) {
+      buy = prices[tomorrow];
+      profit += currProfit;
+      currProfit = 0;
+    } else if (prices[tomorrow] - buy > currProfit) {
+      currProfit = prices[tomorrow] - buy;
+    } else {
+      profit += currProfit;
+      currProfit = 0;
+      buy = prices[tomorrow];
     }
   }
-  // profit += currProfit;
+  profit += currProfit;
   return profit;
 };
 
