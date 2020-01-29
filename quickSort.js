@@ -1,24 +1,23 @@
 const sort = (nums) => {
   let quickSort = (arr, l = 0, r = arr.length) => {
-    let temp;
-    let partition = (a, l, r) => {
-      let p = a[l];
-      lW = l;
-      for(let i = l + 1; i < r; i++) {
-        if(a[i] < p) {
-          temp = a[i];
-          a[i] = a[lW];
-          a[lW] = temp;
-          lW++;
-        }
-      }
-      return lW;
-    }
-    if(l < r) {
+    if (l < r) {
       pivot = partition(arr, l, r);
       quickSort(arr, l, pivot);
       quickSort(arr, pivot + 1, r);
     }
+  }
+  let partition = (a, l, r) => {
+    let temp, p = a[l];
+    lW = l;
+    for (let i = l + 1; i < r; i++) {
+      if (a[i] < p) {
+        temp = a[i];
+        a[i] = a[lW];
+        a[lW] = temp;
+        lW++;
+      }
+    }
+    return lW;
   }
   quickSort(nums);
   return nums;
