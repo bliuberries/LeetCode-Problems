@@ -1,4 +1,5 @@
 const sort = (nums) => {
+  debugger;
   let quickSort = (arr, l = 0, r = arr.length) => {
     if (l < r) {
       pivot = partition(arr, l, r);
