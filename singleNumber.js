@@ -12,6 +12,13 @@ var singleNumber = function (nums) {
   // for(let i in obj) {
   //   if(obj[i] === 1) return i
   // }
+
+  /*XOR (^) operator removes duplicates... 
+  e.g. 2^2 = 0
+  3 ^ 2 ^ 3 = 2
+  1 ^ 2 ^ 3 ^ 3 ^ 2 = 1
+  etc
+ */ 
   var res = nums[0];
   for (var i = 1; i < nums.length; i++) {
     res = res ^ nums[i];
