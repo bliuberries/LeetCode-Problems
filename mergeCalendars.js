@@ -16,58 +16,41 @@
 
 let findTime = (c1, b1, c2, b2, meetingLength) => {
   b1 = [Math.max(b1[0], b2[0]), Math.min(b1[1], b2[1])];
-  let aSlot = [];
-  let bSlot = [];
   let initWindow = b1[0];
-  if (c1.length === 0) {
-    aSlot.push(b1);
-  } else {
-    for (let i = 0; i < c1.length; i++) {
-      if (c1[i][0] >= initWindow + meetingLength) {
-        let slot = [initWindow, c1[i][0]];
-        aSlot.push(slot);
-        initWindow = c1[i][1];
-      } else {
-        initWindow = c1[i][1];
-      }
-      if (i === c1.length - 1 &&
-        b1[1] >= initWindow + meetingLength) {
-        let slot = [initWindow, b1[1]];
-        aSlot.push(slot);
-        initWindow = b1[0];
-      }
-    }
-  }
-
-  if (c2.length === 0) {
-    bSlot.push(b1);
-  } else {
-    for (let i = 0; i < c2.length; i++) {
-      if (c2[i][0] >= initWindow + meetingLength) {
-        let slot = [initWindow, c2[i][0]];
-        bSlot.push(slot);
-        initWindow = c2[i][1];
-      } else {
-        initWindow = c2[i][1];
-      }
-      if (i === c2.length - 1 &&
-        b1[1] >= initWindow + meetingLength) {
-        let slot = [initWindow, b1[1]];
-        bSlot.push(slot);
-        initWindow = b1[0];
+  let findWindow = (busyTimes, arr = []) => {
+    if (busyTimes.length === 0) {
+      arr.push(b1);
+    } else {
+      for (let i = 0; i < busyTimes.length; i++) {
+        if (busyTimes[i][0] >= initWindow + meetingLength) {
+          let slot = [initWindow, busyTimes[i][0]];
+          arr.push(slot);
+        }
+        initWindow = busyTimes[i][1];
+        if (i === busyTimes.length - 1 &&
+          b1[1] >= initWindow + meetingLength) {
+          let slot = [initWindow, b1[1]];
+          arr.push(slot);
+          initWindow = b1[0];
+        }
       }
     }
+    return arr;
   }
+  let aSlot = findWindow(c1);
+  let bSlot = findWindow(c2);
 
   let window = [];
   let a = b = 0;
   let earliestTime = 0;
   let latestTime = 0;
+  let getAvailableTime = (m, n) => {
+    earliestTime = Math.max(aSlot[m][0], bSlot[n][0]);
+    latestTime = Math.min(aSlot[m][1], bSlot[n][1]);
+    window.push([earliestTime, latestTime]);
+  }
   while (a < aSlot.length - 1 || b < bSlot.length - 1) {
-    earliestTime = Math.max(aSlot[a][0], bSlot[b][0]);
-    latestTime = Math.min(aSlot[a][1], bSlot[b][1]);
-    let slot = [earliestTime, latestTime];
-    window.push(slot);
+    getAvailableTime(a, b);
     if (bSlot[b + 1] !== undefined && (aSlot[a][1] <= bSlot[b + 1][0]) || b === bSlot.length - 1) {
       if (aSlot[a + 1] !== undefined && bSlot[b][1] <= aSlot[a + 1][0]) b++;
       a++;
@@ -77,10 +60,7 @@ let findTime = (c1, b1, c2, b2, meetingLength) => {
     }
   }
   if (a === aSlot.length - 1 && b === bSlot.length - 1) {
-    earliestTime = Math.max(aSlot[a][0], bSlot[b][0]);
-    latestTime = Math.min(aSlot[a][1], bSlot[b][1]);
-    let slot = [earliestTime, latestTime];
-    window.push(slot);
+    getAvailableTime(a, b);
   }
   return window;
 }
@@ -108,5 +88,5 @@ let testC4b = [];
 let testDB4b = [0800, 1830];
 let tSlot3 = 30;
 
-// console.log(findTime(testC3a, testDB3a, testC4b, testDB4b, tSlot3));
+console.log(findTime(testC3a, testDB3a, testC4b, testDB4b, tSlot3));
 //output = [[0900, 1830]]
